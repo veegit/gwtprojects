@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='samplegwt'>
+  <inherits name='com.google.gwt.user.User'/>
+  <inherits name='com.google.gwt.user.theme.clean.Clean'/>
+  
+  <!-- Specify the app entry point class.                         -->
+  <entry-point class='com.vee.sample.gwt.client.SampleGWT'/>
+
+  <source path='client'/>
+  <source path='shared'/>
+
+</module>
