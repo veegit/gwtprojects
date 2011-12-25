@@ -23,6 +23,7 @@ import com.google.gwt.user.cellview.client.SafeHtmlHeader;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimpleLayoutPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.DefaultSelectionEventManager;
 import com.google.gwt.view.client.MultiSelectionModel;
@@ -35,7 +36,7 @@ import com.vee.sample.gwt.client.data.GridConstants.ColumnConstants;
 /**
  * Example file.
  */
-public class SampleDataGrid extends SimpleLayoutPanel {
+public class SampleDataGrid extends VerticalPanel {
 
 
   DataGrid<ContactInfo> dataGrid;
@@ -49,15 +50,17 @@ public class SampleDataGrid extends SimpleLayoutPanel {
   public SampleDataGrid(ColumnConstants constants) {
     this.constants = constants;
     onInitialize();
-    Button b = new Button();
+    Button b = new Button("Refresh");
     b.addClickHandler(new ClickHandler() {
 		@Override
 		public void onClick(ClickEvent event) {
-			ContactDatabase.get().generateContacts(250);
+			ContactDatabase.get().refreshDisplays();
 		}
 	});
+    add(b);
     add(dataGrid);
-    this.setHeight("500px");
+    dataGrid.setHeight("600px");
+    dataGrid.setWidth("1800px");
   }
   
   interface TableResources extends DataGrid.Resources
@@ -132,7 +135,7 @@ public class SampleDataGrid extends SimpleLayoutPanel {
 	        }
 	      };
 	     dataGrid.addColumn(idColumn, constants.cwDataGridColumnId());
-	     dataGrid.setColumnWidth(idColumn, 3, Unit.EM);
+	     dataGrid.setColumnWidth(idColumn, 6, Unit.EM);
     }
    
     // First name.

@@ -17,6 +17,10 @@ import com.google.gwt.view.client.ListDataProvider;
  * The data source for contact information used in the sample.
  */
 public class ContactDatabase {
+	
+	
+  private static final int numList = 10; 	
+  List<ContactInfo>[] listArray = new List[numList];
 
   /**
    * A contact category.
@@ -169,7 +173,7 @@ public class ContactDatabase {
     }
 
     // Generate initial data.
-    generateContacts(250);
+    loadData();
   }
 
   /**
@@ -194,18 +198,23 @@ public class ContactDatabase {
     dataProvider.addDataDisplay(display);
   }
 
+  public void loadData() {
+	  for(int i=0;i<numList;i++)
+	   listArray[i] = generateContacts(250);
+	  dataProvider.setList(listArray[0]);
+  }
   /**
    * Generate the specified number of contacts and add them to the data
    * provider.
    * 
    * @param count the number of contacts to generate.
    */
-  public void generateContacts(int count) {
-    List<ContactInfo> contacts = dataProvider.getList();
-    contacts.clear();
+  private List<ContactInfo> generateContacts(int count) {
+    List<ContactInfo> contacts = new ArrayList<ContactInfo>();
     for (int i = 0; i < count; i++) {
       contacts.add(createContactInfo());
     }
+    return contacts;
   }
 
   public ListDataProvider<ContactInfo> getDataProvider() {
@@ -281,6 +290,7 @@ public class ContactDatabase {
    * Refresh all displays.
    */
   public void refreshDisplays() {
+	dataProvider.setList(nextValue(listArray));
     dataProvider.refresh();
   }
 
