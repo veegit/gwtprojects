@@ -57,7 +57,6 @@ public class SampleDataGrid extends VerticalPanel {
 			ContactDatabase.get().refreshDisplays();
 		}
 	});
-    add(b);
     add(dataGrid);
     dataGrid.setHeight("600px");
     dataGrid.setWidth("1800px");
